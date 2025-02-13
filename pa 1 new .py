@@ -45,14 +45,19 @@ def generate_table(rows, cols, bg1, bg2):
 def generate_html():
     """Creates an HTML file using config settings."""
     config = read_config()
-    
-    rows, cols = map(int, config["TABLE_SIZE"].split("x"))
+    table_size = config["TABLE_SIZE"].split("x")
+    rows = int(table_size[0])
+    cols = int(table_size[1])
+
     title = config["TITLE"]
     authors = config["AUTHORS"]
     body_bg = config["BODY_BACKGROUND"]
     border_color = config["TABLE_BORDER_COLOR"]
     cell_bg1 = config["CELL_BACKGROUND1"]
     cell_bg2 = config["CELL_BACKGROUND2"]
+
+
+
 
     html_content = f"""
     <html>
