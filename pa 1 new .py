@@ -4,16 +4,24 @@ def wrap(tag, content):
     """Wraps content in an HTML tag."""
     return f"{tag}{content}{tag.replace('<', '</')}"
 
-def read_config(filename="config.txt"):
+def read_config():
     """Reads a simple config file and returns settings."""
     config = {}
-    
-    with open(filename, "r") as file:
-        for line in file:
-            if "=" in line:
-                key, value = line.strip().split("=")
-                config[key.strip()] = value.strip()
-    
+
+    config_file = open("config.txt", "r")
+    for line in config_file:
+        #splits everything left of = into key and right of = into value
+        if "=" in line:
+            line = line.strip()
+            split_line = line.split("=")
+
+            key = split_line[0]
+            value = split_line[1]
+            config[key] = value
+
+
+
+
     return config
 
 def generate_table(rows, cols, bg1, bg2):
@@ -24,12 +32,15 @@ def generate_table(rows, cols, bg1, bg2):
     for i in range(rows):
         row_html = "<tr>"
         for j in range(cols):
-            bg_color = bg1 if (i + j) % 2 == 0 else bg2
-            row_html += wrap("<td style='padding: 20px; font-size: 24px; background-color:" + bg_color + "; text-align:center;'", letters.pop())
-        row_html += "</tr>"
+            if (i + j) % 2 == 0:
+                bg_color = bg1
+            else:
+                bg_color = bg2
+            row_html = row_html + f"<td style='padding: 20px; font-size: 24px; background-color:{bg_color}; text-align:center;'>{letters.pop()}</td>"
+        row_html = row_html + "</tr>"
         rows_html.append(row_html)
 
-    return wrap("<table border='1' style='border-collapse: collapse; margin: auto;'", "\n".join(rows_html))
+    return wrap("<table border='1' style='border-collapse: collapse; margin: auto;'>", "\n".join(rows_html))
 
 def generate_html():
     """Creates an HTML file using config settings."""
@@ -61,10 +72,10 @@ def generate_html():
     </html>
     """
 
-    with open("pa1.html", "w") as file:
-        file.write(html_content)
+    html_file = open("pa1.html", "w")
+    html_file.write(html_content)
 
+    #debug line for the console so we know what's going on
     print("HTML file 'pa1.html' has been created.")
 
-if __name__ == "__main__":
-    generate_html()
+generate_html()
