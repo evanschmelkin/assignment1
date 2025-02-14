@@ -6,4 +6,4 @@ TABLE_BORDER_PX=5
 AUTHORS=Evan, Antonio, Ibrahim
 TITLE=RaNdOm LEtTeRs
 LETTERS
-5x5
+10x5
