@@ -20,11 +20,11 @@ def read_config():
     table_size = lines[8].strip()  # Get the 9th line
     table_size = table_size.split("x")  # Split by 'x'
 
-    rows = int(table_size[0])  # Convert first part to an integer
-    cols = int(table_size[1])  # Convert second part to an integer
+    rows = int(table_size[0])  #left of x is the rows
+    cols = int(table_size[1])  #right of x is the columns
 
-    config["ROWS"] = rows  # Store rows in config
-    config["COLS"] = cols  # Store columns in config
+    config["ROWS"] = rows
+    config["COLS"] = cols
 
     # Read the rest of the config file
     for line in lines:
@@ -49,8 +49,8 @@ def generate_table(rows, cols, bg1, bg2):
                 bg_color = bg1
             else:
                 bg_color = bg2
-            row_html += f"<td style='padding: 20px; font-size: 24px; background-color:{bg_color}; text-align:center;'>{letters.pop()}</td>"
-        row_html += "</tr>"
+            row_html = row_html + f"<td style='padding: 20px; font-size: 24px; background-color:{bg_color}; text-align:center;'>{letters.pop()}</td>"
+        row_html = row_html + "</tr>"
         rows_html.append(row_html)
 
     return wrap("<table border='1' style='border-collapse: collapse; margin: auto;'>", "\n".join(rows_html))
