@@ -3,7 +3,8 @@ import datetime
 #generateHTML.py
 #Evan, Antonio, and Ibrahim
 #2/11/2025
-#Takes the user input and generates an HTML file
+#Takes the user input and automatically generates an HTML file
+#Includes many things such as an automatic datetime function to show when the page was generated
 
 def wrap(tag, content):
     """Wraps content in an HTML tag."""
