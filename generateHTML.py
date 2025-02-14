@@ -41,14 +41,14 @@ def generate_table(rows, cols, bg1, bg2):
         row_html = "<tr>"
         for j in range(cols):
             if (i + j) % 2 == 0:
-                bg_color = bg1
+                bg_color = "bg1"
             else:
-                bg_color = bg2
-            row_html += f"<td style='padding: 20px; font-size: 24px; background-color:{bg_color}; text-align:center;'>{letters.pop()}</td>"
+                bg_color = "bg2"
+            row_html += f"<td class='{bg_color}'>{letters.pop()}</td>"
         row_html += "</tr>"
         rows_html.append(row_html)
 
-    return wrap("<table border='1' style='border-collapse: collapse; margin: auto;'>", "\n".join(rows_html))
+    return wrap("<table class='letter-table'>", "\n".join(rows_html))
 
 def generate_html():
     """Creates an HTML file using config settings."""
@@ -68,8 +68,24 @@ def generate_html():
     <head>
         <title>{title}</title>
         <style>
-            body {{ background-color: {body_bg}; text-align: center; font-family: Arial, sans-serif; color: white; }}
-            table {{ border: 2px solid {border_color}; }}
+            body {{
+                background-color: {body_bg};
+                text-align: center;
+                font-family: Arial, sans-serif;
+                color: white;
+            }}
+            .letter-table {{
+                border-collapse: collapse;
+                margin: auto;
+                border: 2px solid {border_color};
+            }}
+            .letter-table td {{
+                padding: 20px;
+                font-size: 24px;
+                text-align: center;
+            }}
+            .bg1 {{ background-color: {cell_bg1}; }}
+            .bg2 {{ background-color: {cell_bg2}; }}
         </style>
     </head>
     <body>
@@ -88,4 +104,3 @@ def generate_html():
     print("HTML file 'pa1.html' has been created.")
 
 generate_html()
-
